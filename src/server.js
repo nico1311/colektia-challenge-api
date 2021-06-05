@@ -5,7 +5,7 @@ require('dotenv').config();
 const debug = require('debug')('backend:server'),
   consola = require('consola'),
   http = require('http'),
-  app = require('./app');
+  { app, setup } = require('./app');
 
 /**
  * Normalize a port into a number, string, or false.
@@ -75,9 +75,18 @@ function onListening() {
   consola.info(`Server listening on ${bind}`);
 }
 
-/**
-  * Listen on provided port, on all network interfaces.
-  */
-server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+const boot = async () => {
+  try {
+    consola.info('Starting API server');
+    await setup();
+    server.listen(port);
+  } catch (err) {
+    consola.fatal(err);
+    process.exit(1);
+  }
+}
+
+boot();

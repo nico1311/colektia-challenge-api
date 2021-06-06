@@ -4,9 +4,9 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Express API',
+      title: 'Products CRUD API',
       version: '0.1.0',
-      description: 'Simple CRUD API with Express',
+      description: 'Simple REST API built with Node, Express and Sequelize',
       license: {
         name: 'MIT',
         url: 'https://spdx.org/licenses/MIT.html',

@@ -17,6 +17,7 @@ const { DataTypes, Model } = require('sequelize');
  *          type: string
  *          description: Product name
  *          required: true
+ *          example: 'Lenovo IdeaPad 3 Laptop'
  *        description:
  *          type: string
  *          description: 'Description of the product'
@@ -26,6 +27,7 @@ const { DataTypes, Model } = require('sequelize');
  *          format: double
  *          description: 'Price of the product'
  *          required: true
+ *          example: 359.99
  *        image:
  *          type: string
  *          readOnly: true

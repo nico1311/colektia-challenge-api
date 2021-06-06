@@ -3,6 +3,54 @@ const path = require('path');
 const Product = require('../db/models/Product');
 
 /**
+ * @swagger
+ * components:
+ *  responses:
+ *    UnprocessableEntity:
+ *      description: 'Form data validation failed'
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              errors:
+ *                type: array
+ *                description: 'Array of failed validation rules'
+ *                items:
+ *                  type: object
+ *                  properties:
+ *                    message:
+ *                      type: string
+ *                      description: The error message
+ *                      example: '"name" is not allowed to be empty'
+ *                    path:
+ *                      type: array
+ *                      description: 'Path of the field that failed the validation'
+ *                      items:
+ *                        type: string
+ *                    type:
+ *                      type: string
+ *                      description: 'Error type'
+ *                      example: 'string.empty'
+ *                    context:
+ *                      type: object
+ *                      description: 'The values that were tested against the validator'
+ *                      properties:
+ *                        label:
+ *                          type: string
+ *                          description: 'Field label'
+ *                          example: 'name'
+ *                        value:
+ *                          type: string
+ *                          description: 'The value that was passed to the validator'
+ *                          example: ''
+ *                        key:
+ *                          type: string
+ *                          description: 'Field name'
+ *                          example: 'name'
+ */
+
+/**
  * Create a product
  * @swagger
  * /api/products:
@@ -23,6 +71,8 @@ const Product = require('../db/models/Product');
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/Product'
+ *      '422':
+ *        $ref: '#/components/responses/UnprocessableEntity'
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  * @returns {Promise<void>}
@@ -175,6 +225,8 @@ const getProduct = async (req, res) => {
  *              $ref: '#/components/schemas/Product'
  *      '404':
  *        description: 'The requested product cannot be found'
+ *      '422':
+ *        $ref: '#/components/responses/UnprocessableEntity'
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  * @returns {Promise<void>}

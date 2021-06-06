@@ -1,7 +1,8 @@
-const express = require('express'),
-  router = express.Router();
+const express = require('express');
 
-router.get('/', (req, res, next) => {
+const router = express.Router();
+
+router.get('/', (req, res) => {
   res.json({
     message: 'Hello from server!',
   });

@@ -11,5 +11,13 @@ module.exports = {
     ecmaVersion: 12
   },
   rules: {
+    'consistent-return': ['off'],
+    'max-len': ['error', 125, 2, {
+      ignoreUrls: true,
+      ignoreComments: true,
+      ignoreRegExpLiterals: true,
+      ignoreStrings: true,
+      ignoreTemplateLiterals: true,
+    }]
   }
 };

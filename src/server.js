@@ -2,10 +2,10 @@
  * Module dependencies.
  */
 require('dotenv').config();
-const debug = require('debug')('backend:server'),
-  consola = require('consola'),
-  http = require('http'),
-  { app, setup } = require('./app');
+const debug = require('debug')('backend:server'); // eslint-disable-line no-unused-vars
+const consola = require('consola');
+const http = require('http');
+const { app, setup } = require('./app');
 
 /**
  * Normalize a port into a number, string, or false.
@@ -87,6 +87,6 @@ const boot = async () => {
     consola.fatal(err);
     process.exit(1);
   }
-}
+};
 
 boot();

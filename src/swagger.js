@@ -15,7 +15,7 @@ const options = {
   },
   apis: [
     './src/controllers/*.js',
-    './src/db/models/*.js'
+    './src/db/models/*.js',
   ],
 };
 

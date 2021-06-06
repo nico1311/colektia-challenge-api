@@ -33,19 +33,19 @@ const createProduct = async (req, res) => {
     name: Joi.string().max(255).required(),
     description: Joi.string().required(),
     price: Joi.number().precision(2).required(),
-    imageFile: Joi.string().optional()
+    imageFile: Joi.string().optional(),
   });
 
   try {
     let productValues = await schema.validateAsync(req.fields);
 
     if (req.files && req.files.imageFile) {
-      const imagePath = req.files.imageFile.path,
-        imageName = path.basename(imagePath);
+      const imagePath = req.files.imageFile.path;
+      const imageName = path.basename(imagePath);
       productValues = {
         ...productValues,
-        image: imageName
-      }
+        image: imageName,
+      };
     }
 
     const product = await Product.create(productValues);
@@ -53,15 +53,15 @@ const createProduct = async (req, res) => {
   } catch (err) {
     if (err.details) { // body validation error
       res.status(422).json({
-        errors: err.details
+        errors: err.details,
       });
     } else {
       res.status(500).json({
-        error: err.message
+        error: err.message,
       });
     }
   }
-}
+};
 
 /**
  * Get all products
@@ -91,15 +91,14 @@ const getAllProducts = async (req, res) => {
     const products = await Product.findAll();
 
     res.status(200).json({
-      products
+      products,
     });
-
   } catch (err) {
     res.status(500).json({
-      error: err.message
-    })
+      error: err.message,
+    });
   }
-}
+};
 
 /**
  * Get a single product
@@ -140,9 +139,11 @@ const getProduct = async (req, res) => {
 
     res.status(200).json(product);
   } catch (err) {
-    console.error(err);
+    res.status(500).json({
+      error: err.message,
+    });
   }
-}
+};
 
 /**
  * Edit a product
@@ -179,12 +180,12 @@ const getProduct = async (req, res) => {
  * @returns {Promise<void>}
  *
  */
- const editProduct = async (req, res) => {
+const editProduct = async (req, res) => {
   const schema = Joi.object({
     name: Joi.string().max(255).optional(),
     description: Joi.string().optional(),
     price: Joi.number().precision(2).optional(),
-    imageFile: Joi.string().optional()
+    imageFile: Joi.string().optional(),
   });
 
   try {
@@ -197,17 +198,17 @@ const getProduct = async (req, res) => {
     let newProductValues = await schema.validateAsync(req.fields);
 
     if (req.files && req.files.imageFile) {
-      const imagePath = req.files.imageFile.path,
-        imageName = path.basename(imagePath);
+      const imagePath = req.files.imageFile.path;
+      const imageName = path.basename(imagePath);
       newProductValues = {
         ...newProductValues,
-        image: imageName
-      }
+        image: imageName,
+      };
     }
 
-    for (const key in newProductValues) {
+    Object.keys(newProductValues).forEach((key) => {
       product[key] = newProductValues[key];
-    }
+    });
 
     await product.save();
 
@@ -215,15 +216,15 @@ const getProduct = async (req, res) => {
   } catch (err) {
     if (err.details) { // body validation error
       res.status(422).json({
-        errors: err.details
+        errors: err.details,
       });
     } else {
       res.status(500).json({
-        error: err.message
+        error: err.message,
       });
     }
   }
-}
+};
 
 /**
  * Delete a product
@@ -250,7 +251,7 @@ const getProduct = async (req, res) => {
  * @returns {Promise<void>}
  *
  */
- const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res) => {
   try {
     const productId = parseInt(req.params.id, 10);
     if (Number.isNaN(productId)) return res.status(404).end();
@@ -262,14 +263,16 @@ const getProduct = async (req, res) => {
 
     res.status(204).end();
   } catch (err) {
-    console.error(err);
+    res.status(500).json({
+      error: err.message,
+    });
   }
-}
+};
 
 module.exports = {
   createProduct,
   getAllProducts,
   getProduct,
   editProduct,
-  deleteProduct
-}
+  deleteProduct,
+};

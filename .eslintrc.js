@@ -11,6 +11,7 @@ module.exports = {
     ecmaVersion: 12
   },
   rules: {
+    'comma-dangle': ['error', 'never'],
     'consistent-return': ['off'],
     'max-len': ['error', 125, 2, {
       ignoreUrls: true,

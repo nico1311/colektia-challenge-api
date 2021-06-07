@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "express-products-crud",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "node-dev --notify=false ./src/server.js",
-    "lint": "eslint src/",
+    "lint": "eslint src/ test/",
     "start": "node ./src/server.js",
     "test": "mocha --exit ./test/**/*.js"
   },

@@ -48,17 +48,17 @@ class Product extends Model {
   static init(sequelize) {
     return super.init({
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       description: {
-        type: DataTypes.TEXT,
+        type: DataTypes.TEXT
       },
       price: {
-        type: DataTypes.DECIMAL(14, 2),
+        type: DataTypes.DECIMAL(14, 2)
       },
       image: {
-        type: DataTypes.STRING,
-      },
+        type: DataTypes.STRING
+      }
     }, { sequelize });
   }
 }

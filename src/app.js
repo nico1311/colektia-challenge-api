@@ -33,7 +33,7 @@ app.use((req, res, next) => {
     hashAlgorithm: 'sha256',
     keepExtensions: true,
     maxFileSize: 2 * 1024 * 1024,
-    uploadDir: path.resolve('./uploads'),
+    uploadDir: path.resolve('./uploads')
   });
 
   form.parse(req, (err, fields, files) => {
@@ -45,7 +45,7 @@ app.use((req, res, next) => {
     Object.assign(req, {
       fields,
       files,
-      formParsed: true,
+      formParsed: true
     });
 
     next();
@@ -68,5 +68,5 @@ const setup = async () => {
 
 module.exports = {
   app,
-  setup,
+  setup
 };

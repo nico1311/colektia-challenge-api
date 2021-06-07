@@ -7,9 +7,9 @@ const db = process.env.NODE_ENV === 'test' ? process.env.MYSQL_TEST_DB : process
  */
 const sequelize = new Sequelize(db, process.env.MYSQL_USER, process.env.MYSQL_PASS, {
   host: process.env.MYSQL_HOST || 'localhost',
-  dialect: 'mysql',
+  dialect: 'mysql'
 });
 
 module.exports = {
-  sequelize,
+  sequelize
 };

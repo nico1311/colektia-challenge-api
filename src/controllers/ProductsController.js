@@ -83,7 +83,7 @@ const createProduct = async (req, res) => {
     name: Joi.string().max(255).required(),
     description: Joi.string().required(),
     price: Joi.number().precision(2).required(),
-    imageFile: Joi.string().optional(),
+    imageFile: Joi.string().optional()
   });
 
   try {
@@ -94,7 +94,7 @@ const createProduct = async (req, res) => {
       const imageName = path.basename(imagePath);
       productValues = {
         ...productValues,
-        image: imageName,
+        image: imageName
       };
     }
 
@@ -103,11 +103,11 @@ const createProduct = async (req, res) => {
   } catch (err) {
     if (err.details) { // body validation error
       res.status(422).json({
-        errors: err.details,
+        errors: err.details
       });
     } else {
       res.status(500).json({
-        error: err.message,
+        error: err.message
       });
     }
   }
@@ -141,11 +141,11 @@ const getAllProducts = async (req, res) => {
     const products = await Product.findAll();
 
     res.status(200).json({
-      products,
+      products
     });
   } catch (err) {
     res.status(500).json({
-      error: err.message,
+      error: err.message
     });
   }
 };
@@ -190,7 +190,7 @@ const getProduct = async (req, res) => {
     res.status(200).json(product);
   } catch (err) {
     res.status(500).json({
-      error: err.message,
+      error: err.message
     });
   }
 };
@@ -237,7 +237,7 @@ const editProduct = async (req, res) => {
     name: Joi.string().max(255).optional(),
     description: Joi.string().optional(),
     price: Joi.number().precision(2).optional(),
-    imageFile: Joi.string().optional(),
+    imageFile: Joi.string().optional()
   });
 
   try {
@@ -254,7 +254,7 @@ const editProduct = async (req, res) => {
       const imageName = path.basename(imagePath);
       newProductValues = {
         ...newProductValues,
-        image: imageName,
+        image: imageName
       };
     }
 
@@ -268,11 +268,11 @@ const editProduct = async (req, res) => {
   } catch (err) {
     if (err.details) { // body validation error
       res.status(422).json({
-        errors: err.details,
+        errors: err.details
       });
     } else {
       res.status(500).json({
-        error: err.message,
+        error: err.message
       });
     }
   }
@@ -316,7 +316,7 @@ const deleteProduct = async (req, res) => {
     res.status(204).end();
   } catch (err) {
     res.status(500).json({
-      error: err.message,
+      error: err.message
     });
   }
 };
@@ -326,5 +326,5 @@ module.exports = {
   getAllProducts,
   getProduct,
   editProduct,
-  deleteProduct,
+  deleteProduct
 };

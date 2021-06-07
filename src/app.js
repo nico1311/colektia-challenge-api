@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const logger = require('morgan');
 const swaggerUI = require('swagger-ui-express');
 const formidable = require('formidable');
@@ -17,6 +18,10 @@ const apiRouter = require('./routes/api');
 const app = express();
 
 app.use(logger('dev'));
+app.use(cors({
+  methods: ['GET', 'POST', 'PATCH', 'DELETE']
+}));
+app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

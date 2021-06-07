@@ -82,6 +82,7 @@ const boot = async () => {
   try {
     consola.info('Starting API server');
     await setup();
+    consola.success('Connected to the database');
     server.listen(port);
   } catch (err) {
     consola.fatal(err);

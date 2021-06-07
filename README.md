@@ -14,8 +14,9 @@ API REST realizada con Node y Express, con operaciones CRUD para crear, listar, 
     MYSQL_PASS=
     MYSQL_DB=crud_api
     ```
-4. Ejecutar el servidor (en modo desarrollo, recargando ante cambios en el código) con `npm run dev`, o en modo producción con `npm start`
-5. Por default, el servidor de API estará disponible en http://localhost:3001
+4. Opcional: crear la tabla `products` en la base de datos con el esquema de `db.sql`. Si la tabla no existe al momento de arrancar el servidor por primera vez, será creada automáticamente
+5. Ejecutar el servidor (en modo desarrollo, recargando ante cambios en el código) con `npm run dev`, o en modo producción con `npm start`
+6. Por default, el servidor de API estará disponible en http://localhost:3001
 
 ## Rutas de la API
 La documentación de la API, generada con Swagger UI, está disponible ingresando a la ruta `/docs`.
@@ -44,3 +45,8 @@ Los métodos **POST** y **PATCH** aceptan los siguientes campos para describir u
 Al completarse exitosamente, las operaciones de creación devuelven código `201`, las modificaciones devuelven código `200`, y las eliminaciones devuelven código `204`.
 
 En caso de que el ID ingresado en el path para las operaciones de modificación o eliminación no exista, se devolverá el código de estado `404`. Asimismo, para las operaciones de escritura, si el `form-data` no tiene la estructura correcta, se devolverá código `422`.
+
+## Tests
+Se incluyen tests básicos que prueban las operaciones de la API. Los tests están escritos utilizando [Mocha](https://mochajs.org/), [chai](https://chaijs.com) y [supertest](https://www.npmjs.com/package/supertest).
+
+Para ejecutar los tests, configurar la variable de entorno `MYSQL_TEST_DB` con el nombre de la base de datos a usar para las pruebas (se utilizan el mismo host y credenciales), y ejecutar `npm run test`.

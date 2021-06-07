@@ -52,6 +52,10 @@ app.use((req, res, next) => {
   });
 });
 
+// Initializing models
+Product.init(sequelize);
+
+// Routes
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
@@ -59,9 +63,7 @@ app.use('/images', express.static(path.resolve('./uploads')));
 
 const setup = async () => {
   await sequelize.authenticate();
-  Product.init(sequelize);
   await Product.sync();
-  consola.success('Connected to the database');
 };
 
 module.exports = {
